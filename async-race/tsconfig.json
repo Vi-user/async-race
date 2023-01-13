@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "outDir": "./dist",
+    "baseUrl": "."
+  },
+  "include": ["src/**/*", "modules.d.ts", ".eslintrc"],
+  "exclude": ["node_modules"]
+}
