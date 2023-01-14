@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+
+.button {
+  text-transform: uppercase;
+  //width: 5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: $color-button;
+  color: $color-button_text;
+  border: 1px solid #b34c05;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $color-button_hover;
+  }
+}
