@@ -71,6 +71,9 @@ module.exports = ({ development }) => ({
     }),
     new CleanWebpackPlugin(),
   ],
+  experiments: {
+    topLevelAwait: true
+  },
   resolve: {
     extensions: ['.js', '.ts', '.scss'],
   },
