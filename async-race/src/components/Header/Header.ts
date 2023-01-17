@@ -1,18 +1,18 @@
-import { CreateNodeType, createNode } from '../../helper';
+import { ICreateNode, createButton } from '../../helper';
 import { PAGES } from '../../types/types';
 import './Header.scss';
 
-const garageBtn: CreateNodeType = {
+const garageBtn: ICreateNode = {
   tag: 'button',
   name: `to ${PAGES.GARAGE}`,
   classes: ['button', 'header-buttons'],
 };
 
-const winnersBtn: CreateNodeType = {
+const winnersBtn: ICreateNode = {
   tag: 'button',
   name: `to ${PAGES.WINNERS}`,
   classes: ['button', 'header-buttons'],
 };
 
-export const garageButton = createNode(garageBtn);
-export const winnersButton = createNode(winnersBtn);
+export const garageButton = createButton(garageBtn);
+export const winnersButton = createButton(winnersBtn);

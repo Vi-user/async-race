@@ -1,10 +1,10 @@
 export interface Car {
   name: string;
   color: string;
-  id: number;
+  id?: number;
 }
 
 export enum PAGES {
-  'GARAGE' = 'garage',
-  'WINNERS' = 'winners',
+  GARAGE = 'garage',
+  WINNERS = 'winners',
 }

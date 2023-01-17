@@ -1,0 +1,16 @@
+@import 'variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+body {
+  background: $color-background_main;
+  font-size: 2rem;
+}
