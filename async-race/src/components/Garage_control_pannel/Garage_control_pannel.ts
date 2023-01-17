@@ -1,26 +1,26 @@
-import { CreateNodeType, createNode } from '../../helper';
+import { ICreateNode, createButton } from '../../helper';
 import { addCar } from '../../api';
 import './Garage_control_pannel.scss';
 
-const carNameInput: CreateNodeType = {
+const carNameInput: ICreateNode = {
   tag: 'input',
   name: 'carNameInput',
   classes: ['carNameInput'],
 };
 
-const carColorInput: CreateNodeType = {
+const carColorInput: ICreateNode = {
   tag: 'input',
   name: 'carColorInput',
   classes: ['carColorInput'],
 };
 
-const createCarBtn: CreateNodeType = {
+const createCarBtn: ICreateNode = {
   tag: 'button',
   name: 'create',
   classes: ['form-button', 'create-button'],
 };
 
-export const createForm = createNode({
+export const createForm = createButton({
   tag: 'form',
   name: '',
   classes: ['createForm'],
@@ -37,16 +37,16 @@ async function createSubmitHandler(e: Event) {
   console.log(newCar);
 }
 
-export const nameInput = createNode(carNameInput) as HTMLInputElement;
+export const nameInput = createButton(carNameInput) as HTMLInputElement;
 nameInput.type = 'text';
 nameInput.name = 'carNameInput';
 nameInput.value = '';
 nameInput.placeholder = 'car name';
-export const colorInput = createNode(carColorInput) as HTMLInputElement;
+export const colorInput = createButton(carColorInput) as HTMLInputElement;
 colorInput.type = 'color';
 colorInput.name = 'carColorInput';
 colorInput.value = '#fff';
-export const createCarButton = createNode(createCarBtn) as HTMLButtonElement;
+export const createCarButton = createButton(createCarBtn) as HTMLButtonElement;
 createCarButton.addEventListener('click', (e: Event) => createSubmitHandler(e));
 
 createForm.append(nameInput, colorInput, createCarButton);

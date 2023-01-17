@@ -1,6 +1,7 @@
 @import '../../styles/variables';
 
-.createForm {
+.createForm,
+.updateForm {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -22,5 +23,9 @@
   cursor: pointer;
   &:hover {
     color: $color-button-text_hover;
+  }
+  &:disabled {
+    color: gray;
+    cursor: initial;
   }
 }

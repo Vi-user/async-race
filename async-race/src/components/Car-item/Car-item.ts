@@ -9,6 +9,21 @@ async function handleDeleteBtn(id: number) {
   deletedItem?.remove();
 }
 
+async function activateUpdateBtn(car: Car) {
+  console.log(typeof car.id);
+  const formUpdate = document.getElementById('updateCarForm') as HTMLFormElement;
+  const carID = formUpdate.getElementsByClassName('carIDInput')[0] as HTMLInputElement;
+  carID.value = `${car.id}`;
+  const carName = formUpdate.getElementsByClassName('carNameInput')[0] as HTMLInputElement;
+  carName.removeAttribute('disabled');
+  carName.value = car.name;
+  const carColor = formUpdate.getElementsByClassName('carColorInput')[0] as HTMLInputElement;
+  carColor.removeAttribute('disabled');
+  carColor.value = car.color;
+  const carBtn = formUpdate.getElementsByClassName('update-button')[0];
+  carBtn.removeAttribute('disabled');
+}
+
 export default function createCarItem(car: Car): HTMLElement {
   const trackLine = createNode({
     tag: 'div',
@@ -29,11 +44,10 @@ export default function createCarItem(car: Car): HTMLElement {
   };
 
   const selectCarButton = createButton(selectCarBtn);
-  selectCarButton.addEventListener('click', () => console.log('update'));
+  selectCarButton.addEventListener('click', () => activateUpdateBtn(car));
 
   const removeCarButton = createButton(removeCarBtn);
-  // removeCarButton.addEventListener('click', () => deleteCar(car.id || 0));
-  removeCarButton.addEventListener('click', () => handleDeleteBtn(car.id || 0));
+  removeCarButton.addEventListener('click', () => handleDeleteBtn(car.id || 0)); // TODO WTH 0?!
 
   const carName = createNode({
     tag: 'span',

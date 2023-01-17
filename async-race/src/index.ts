@@ -3,8 +3,11 @@ import { garageButton, winnersButton } from './components/Header/Header';
 import './index.scss';
 import { createForm } from './components/Garage_control_pannel/Garage_control_pannel';
 import { garageContainer } from './components/Garage_page/Garage_page';
+import { updateForm } from './components/Garage_control_pannel/Garage_control_pannel_Update';
 
-document?.querySelector('body')?.append(garageButton, winnersButton, createForm, garageContainer);
+document
+  ?.querySelector('body')
+  ?.append(garageButton, winnersButton, createForm, updateForm, garageContainer);
 
 // const myCar = await getCar(2);
 // // const newCar = await addCar({ name: 'test2', color: 'blue23' });
