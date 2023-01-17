@@ -9,7 +9,7 @@ export const garageContainer = createNode({
   classes: ['garage-container'],
 }) as HTMLFormElement;
 
-const garageTitle = createNode({
+export const garageTitle = createNode({
   tag: 'p',
   classes: ['garage-title'],
 }) as HTMLFormElement;

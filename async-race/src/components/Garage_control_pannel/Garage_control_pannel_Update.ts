@@ -33,6 +33,17 @@ export const updateForm = createButton({
 }) as HTMLFormElement;
 updateForm.id = 'updateCarForm';
 
+export const IDInput = createButton(carIDInput) as HTMLInputElement;
+IDInput.name = 'carIDInput';
+IDInput.type = 'hidden';
+
+export const nameInput = createButton(carNameInput) as HTMLInputElement;
+nameInput.type = 'text';
+nameInput.name = 'carNameInput';
+nameInput.value = '';
+nameInput.placeholder = 'car name';
+nameInput.disabled = true;
+
 async function updateSubmitHandler(e: Event) {
   e.preventDefault();
   console.log('update');
@@ -44,21 +55,22 @@ async function updateSubmitHandler(e: Event) {
   // console.log(id, 'id');
   const updatedCar = await updateCar({ name: `${name}`, color: `${color}`, id: Number(id) });
   // TODO check results
+  debugger;
   // TODO update TABLE | item, clear & disabled inputs
-  // createCarItem({ name: `${name}`, color: `${color}`, id: Number(id) })
+  // formElement.innerText = '';
+  // formElement.append(IDInput, nameInput, colorInput, createCarButton);
+  // formElement.replaceWith(updateForm);
+  // TODO if response success => change data
+  const selectedRow = document.getElementById(`car_${id}`) as HTMLDivElement;
+  console.log('selectedRow', selectedRow);
+  const selectedName = selectedRow.getElementsByClassName('track-name')[0] as HTMLSpanElement;
+  selectedName.innerText = `${name}`; // TODO in memory prev value ?!
+  console.log('selectedName', selectedName);
+  const selectedColor = selectedRow.getElementsByClassName('car-SVG')[0] as HTMLDivElement;
+  selectedColor.style.background = `${color}`;
+  console.log('selectedColor', selectedColor);
   console.log(updatedCar);
 }
-
-export const IDInput = createButton(carIDInput) as HTMLInputElement;
-IDInput.name = 'carIDInput';
-IDInput.type = 'hidden';
-
-export const nameInput = createButton(carNameInput) as HTMLInputElement;
-nameInput.type = 'text';
-nameInput.name = 'carNameInput';
-nameInput.value = '';
-nameInput.placeholder = 'car name';
-nameInput.disabled = true;
 
 export const colorInput = createButton(carColorInput) as HTMLInputElement;
 colorInput.type = 'color';
