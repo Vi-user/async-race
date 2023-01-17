@@ -1,0 +1,26 @@
+@import '../../styles/variables';
+
+.createForm {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.carColorInput,
+.carNameInput {
+  border-radius: 8px;
+  border: 1px $color-border solid;
+}
+
+.form-button {
+  padding: 5px 8px;
+  border-radius: 8px;
+  border: 2px $color-border solid;
+  background-color: $color-button_background;
+  color: $color-button_text;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    color: $color-button-text_hover;
+  }
+}
