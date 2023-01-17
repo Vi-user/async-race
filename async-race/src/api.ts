@@ -63,10 +63,10 @@ export const updateCar = async ({ name, color, id }: Car): Promise<Car> => {
 
 export const deleteCar = async (id: number): Promise<void> => {
   // try {
-    const response = await fetch(`${garagePageUrl}/${id}`, {
-      method: Methods.DELETE,
-    });
-    const responseStatus = await response.json();
-    return responseStatus;
+  const response = await fetch(`${garagePageUrl}/${id}`, {
+    method: Methods.DELETE,
+  });
+  const responseStatus = await response.json();
+  return responseStatus;
   // } catch (err) { throw new Error(`${err}`);}
 };
