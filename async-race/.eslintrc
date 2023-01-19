@@ -30,6 +30,7 @@
     "class-methods-use-this": "off",
     "comma-dangle": "off",
     "@typescript-eslint/comma-dangle": "warn",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "object-curly-newline": "off"
   }
 }
