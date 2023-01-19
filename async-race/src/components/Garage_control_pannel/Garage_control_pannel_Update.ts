@@ -1,24 +1,15 @@
 import { ICreateButton, createButton, ICreateInput, createInput, createNode } from '../../helper';
 import { carNameInput, carColorInput } from './Garage_control_pannel';
 import { updateCar } from '../../api';
+import { handleUpdate } from '../Car-item/Car-item';
 import './Garage_control_pannel.scss';
 
 const carIDInput: ICreateInput = {
   tag: 'input',
-  name: 'carIDInput',
   classes: ['carIDInput'],
-};
-
-const carNameInput: ICreateNode = {
-  tag: 'input',
-  name: 'carNameInput',
-  classes: ['carNameInput'],
-};
-
-const carColorInput: ICreateNode = {
-  tag: 'input',
-  name: 'carColorInput',
-  classes: ['carColorInput'],
+  name: 'carIDInput',
+  type: 'hidden',
+  value: '',
 };
 
 const updateCarBtn: ICreateButton = {
@@ -29,48 +20,39 @@ const updateCarBtn: ICreateButton = {
 
 const updateForm = createNode({
   tag: 'form',
-  name: '',
   classes: ['updateForm'],
 }) as HTMLFormElement;
 updateForm.id = 'updateCarForm';
 
-export const IDInput = createButton(carIDInput) as HTMLInputElement;
-IDInput.name = 'carIDInput';
-IDInput.type = 'hidden';
-
-export const nameInput = createButton(carNameInput) as HTMLInputElement;
-nameInput.type = 'text';
-nameInput.name = 'carNameInput';
-nameInput.value = '';
-nameInput.placeholder = 'car name';
-nameInput.disabled = true;
-
 async function updateSubmitHandler(e: Event) {
   e.preventDefault();
-  console.log('update');
   const formElement = document.getElementById('updateCarForm') as HTMLFormElement;
   const formData = new FormData(formElement);
   const name = formData.get('carNameInput') !== '' ? formData.get('carNameInput') : 'newCar';
   const color = formData.get('carColorInput');
   const id = formData.get('carIDInput');
-  // console.log(id, 'id');
   const updatedCar = await updateCar({ name: `${name}`, color: `${color}`, id: Number(id) });
   // TODO check results
-  debugger;
-  // TODO update TABLE | item, clear & disabled inputs
-  // formElement.innerText = '';
-  // formElement.append(IDInput, nameInput, colorInput, createCarButton);
-  // formElement.replaceWith(updateForm);
   // TODO if response success => change data
   const selectedRow = document.getElementById(`car_${id}`) as HTMLDivElement;
-  console.log('selectedRow', selectedRow);
   const selectedName = selectedRow.getElementsByClassName('track-name')[0] as HTMLSpanElement;
   selectedName.innerText = `${name}`; // TODO in memory prev value ?!
-  console.log('selectedName', selectedName);
   const selectedColor = selectedRow.getElementsByClassName('car-SVG')[0] as HTMLDivElement;
   selectedColor.style.background = `${color}`;
-  console.log('selectedColor', selectedColor);
-  console.log(updatedCar);
+
+  // TODO update TABLE | item, clear & disabled inputs
+  formElement.reset();
+  const selectCarBtn = selectedRow.getElementsByClassName(
+    'updateCarButton',
+  )[0] as HTMLButtonElement;
+  selectCarBtn?.removeEventListener('click', handleUpdate(updatedCar));
+  selectCarBtn?.addEventListener('click', handleUpdate(updatedCar));
+  const nameInputField = document.getElementById('updateNameInput') as HTMLInputElement;
+  nameInputField.disabled = true;
+  const colorInputField = document.getElementById('updateColorInput') as HTMLInputElement;
+  colorInputField.disabled = true;
+  const updateBtnField = document.getElementById('updateCarButton') as HTMLButtonElement;
+  updateBtnField.disabled = true;
 }
 
 const IDInput = createInput(carIDInput) as HTMLInputElement;

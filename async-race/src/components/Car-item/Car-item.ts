@@ -3,14 +3,15 @@ import { deleteCar } from '../../api';
 import { Car } from '../../types/types';
 import './Car-item.scss';
 
-async function handleDeleteBtn(id: number) {
-  const deletedItem = document.getElementById(`car_${id}`);
-  await deleteCar(id);
-  deletedItem?.remove();
+async function handleDeleteBtn(id?: number): Promise<void> {
+  if (typeof id === 'number') {
+    const deletedItem = document.getElementById(`car_${id}`);
+    await deleteCar(id);
+    deletedItem?.remove();
+  }
 }
 
 async function activateUpdateBtn(car: Car) {
-  console.log(typeof car.id);
   const formUpdate = document.getElementById('updateCarForm') as HTMLFormElement;
   const carID = formUpdate.getElementsByClassName('carIDInput')[0] as HTMLInputElement;
   carID.value = `${car.id}`;
@@ -22,6 +23,10 @@ async function activateUpdateBtn(car: Car) {
   carColor.value = car.color;
   const carBtn = formUpdate.getElementsByClassName('update-button')[0];
   carBtn.removeAttribute('disabled');
+}
+
+export function handleUpdate(car: Car) {
+  return () => activateUpdateBtn(car);
 }
 
 export default function createCarItem(car: Car): HTMLElement {
@@ -44,10 +49,11 @@ export default function createCarItem(car: Car): HTMLElement {
   };
 
   const selectCarButton = createButton(selectCarBtn);
-  selectCarButton.addEventListener('click', () => activateUpdateBtn(car));
+  selectCarButton.classList.add('updateCarButton');
+  selectCarButton.addEventListener('click', handleUpdate(car));
 
   const removeCarButton = createButton(removeCarBtn);
-  removeCarButton.addEventListener('click', () => handleDeleteBtn(car.id || 0)); // TODO WTH 0?!
+  removeCarButton.addEventListener('click', () => handleDeleteBtn(car.id));
 
   const carName = createNode({
     tag: 'span',
