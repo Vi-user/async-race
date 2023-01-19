@@ -25,6 +25,7 @@ const garageRing = createNode({
   tag: 'div',
   classes: ['garage-ring'],
 }) as HTMLFormElement;
+garageRing.setAttribute('id', 'garage-ring');
 
 carsData?.map((el) => garageRing.append(createCarItem(el)));
 

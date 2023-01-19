@@ -1,8 +1,9 @@
-import { ICreateNode, createButton } from '../../helper';
+import { ICreateButton, createButton, ICreateInput, createInput, createNode } from '../../helper';
+import { carNameInput, carColorInput } from './Garage_control_pannel';
 import { updateCar } from '../../api';
 import './Garage_control_pannel.scss';
 
-const carIDInput: ICreateNode = {
+const carIDInput: ICreateInput = {
   tag: 'input',
   name: 'carIDInput',
   classes: ['carIDInput'],
@@ -20,13 +21,13 @@ const carColorInput: ICreateNode = {
   classes: ['carColorInput'],
 };
 
-const createCarBtn: ICreateNode = {
+const updateCarBtn: ICreateButton = {
   tag: 'button',
   name: 'update',
   classes: ['form-button', 'update-button'],
 };
 
-export const updateForm = createButton({
+const updateForm = createNode({
   tag: 'form',
   name: '',
   classes: ['updateForm'],
@@ -72,13 +73,21 @@ async function updateSubmitHandler(e: Event) {
   console.log(updatedCar);
 }
 
-export const colorInput = createButton(carColorInput) as HTMLInputElement;
-colorInput.type = 'color';
-colorInput.name = 'carColorInput';
-colorInput.value = '#fff';
-colorInput.disabled = true;
-export const createCarButton = createButton(createCarBtn) as HTMLButtonElement;
-createCarButton.disabled = true;
-createCarButton.addEventListener('click', (e: Event) => updateSubmitHandler(e));
+const IDInput = createInput(carIDInput) as HTMLInputElement;
 
-updateForm.append(IDInput, nameInput, colorInput, createCarButton);
+const nameInput = createInput(carNameInput) as HTMLInputElement;
+nameInput.disabled = true;
+nameInput.setAttribute('id', 'updateNameInput');
+
+const colorInput = createInput(carColorInput) as HTMLInputElement;
+colorInput.disabled = true;
+colorInput.setAttribute('id', 'updateColorInput');
+
+const updateCarButton = createButton(updateCarBtn) as HTMLButtonElement;
+updateCarButton.disabled = true;
+updateCarButton.setAttribute('id', 'updateCarButton');
+updateCarButton.addEventListener('click', (e: Event) => updateSubmitHandler(e));
+
+updateForm.append(IDInput, nameInput, colorInput, updateCarButton);
+
+export default updateForm;

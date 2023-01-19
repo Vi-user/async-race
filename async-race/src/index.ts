@@ -1,9 +1,9 @@
 import { garageButton, winnersButton } from './components/Header/Header';
 // import { getCarsOnPage, getCar, addCar, deleteCar, updateCar } from './api';
 import './index.scss';
-import { createForm } from './components/Garage_control_pannel/Garage_control_pannel';
+import createForm from './components/Garage_control_pannel/Garage_control_pannel_Create';
 import { garageContainer } from './components/Garage_page/Garage_page';
-import { updateForm } from './components/Garage_control_pannel/Garage_control_pannel_Update';
+import updateForm from './components/Garage_control_pannel/Garage_control_pannel_Update';
 
 document
   ?.querySelector('body')

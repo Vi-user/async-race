@@ -1,4 +1,4 @@
-import { createButton, createNode, ICreateNode } from '../../helper';
+import { createButton, createNode, ICreateButton } from '../../helper';
 import { deleteCar } from '../../api';
 import { Car } from '../../types/types';
 import './Car-item.scss';
@@ -31,13 +31,13 @@ export default function createCarItem(car: Car): HTMLElement {
   }) as HTMLElement;
   trackLine.setAttribute('id', `car_${car.id}`);
 
-  const selectCarBtn: ICreateNode = {
+  const selectCarBtn: ICreateButton = {
     tag: 'button',
     name: 'select',
     classes: ['button', 'car-buttons'],
   };
 
-  const removeCarBtn: ICreateNode = {
+  const removeCarBtn: ICreateButton = {
     tag: 'button',
     name: 'remove',
     classes: ['button', 'car-buttons'],

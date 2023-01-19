@@ -1,14 +1,14 @@
-import { ICreateNode, createButton } from '../../helper';
+import { ICreateButton, createButton } from '../../helper';
 import { PAGES } from '../../types/types';
 import './Header.scss';
 
-const garageBtn: ICreateNode = {
+const garageBtn: ICreateButton = {
   tag: 'button',
   name: `to ${PAGES.GARAGE}`,
   classes: ['button', 'header-buttons'],
 };
 
-const winnersBtn: ICreateNode = {
+const winnersBtn: ICreateButton = {
   tag: 'button',
   name: `to ${PAGES.WINNERS}`,
   classes: ['button', 'header-buttons'],
