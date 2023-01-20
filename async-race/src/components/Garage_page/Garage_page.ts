@@ -9,18 +9,6 @@ export const garageContainer = createNode({
   classes: ['garage-container'],
 }) as HTMLFormElement;
 
-export const garageTitle = createNode({
-  tag: 'p',
-  classes: ['garage-title'],
-}) as HTMLFormElement;
-garageTitle.innerText = `Garage (${carsQuantity})`;
-
-const garagePageNumber = createNode({
-  tag: 'p',
-  classes: ['garage-page-number'],
-}) as HTMLFormElement;
-garageTitle.innerText = 'Page #1';
-
 const garageRing = createNode({
   tag: 'div',
   classes: ['garage-ring'],

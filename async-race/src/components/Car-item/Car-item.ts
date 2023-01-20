@@ -2,6 +2,7 @@ import { createButton, createNode, ICreateButton } from '../../helper';
 import { deleteCar } from '../../api';
 import { Car } from '../../types/types';
 import './Car-item.scss';
+import { currentCarsQuantity } from '../Cars-statistic/Cars-statistic';
 
 async function handleDeleteBtn(id?: number): Promise<void> {
   if (typeof id === 'number') {

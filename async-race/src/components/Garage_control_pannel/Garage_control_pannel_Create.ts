@@ -2,6 +2,8 @@ import { createButton, createInput, createNode, ICreateButton } from '../../help
 import { carNameInput, carColorInput } from './Garage_control_pannel';
 import { addCar } from '../../api';
 import createCarItem from '../Car-item/Car-item';
+import { currentCarsQuantity } from '../Cars-statistic/Cars-statistic';
+import APP_STATE from '../../state';
 
 const createForm = createNode({
   tag: 'form',
