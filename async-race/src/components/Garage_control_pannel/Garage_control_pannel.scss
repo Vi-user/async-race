@@ -25,7 +25,7 @@
     color: $color-button-text_hover;
   }
   &:disabled {
-    color: gray;
+    color: $color-button-text_disabled;
     cursor: initial;
   }
 }
