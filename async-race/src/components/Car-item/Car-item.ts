@@ -1,6 +1,7 @@
 import { createButton, createNode, ICreateButton } from '../../helper';
 import { deleteCar } from '../../api';
 import { Car } from '../../types/types';
+import APP_STATE from '../../state';
 import './Car-item.scss';
 import { currentCarsQuantity } from '../Cars-statistic/Cars-statistic';
 
@@ -8,6 +9,9 @@ async function handleDeleteBtn(id?: number): Promise<void> {
   if (typeof id === 'number') {
     const deletedItem = document.getElementById(`car_${id}`);
     await deleteCar(id);
+    // TODO check success
+    APP_STATE.totalCars -= 1;
+    currentCarsQuantity();
     deletedItem?.remove();
   }
 }

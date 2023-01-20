@@ -18,6 +18,9 @@ async function createSubmitHandler(e: Event) {
   const name = formData.get('carNameInput') !== '' ? formData.get('carNameInput') : 'newCar';
   const color = formData.get('carColorInput');
   const newCar = await addCar({ name: `${name}`, color: `${color}` });
+  // TODO check success
+  APP_STATE.totalCars += 1;
+  currentCarsQuantity();
   await document?.getElementById('garage-ring')?.append(createCarItem(newCar));
   formElement.reset();
 }

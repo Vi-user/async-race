@@ -1,7 +1,8 @@
 import { PAGES, Car } from './types/types';
+// import { CARS_PER_PAGE } from './state';
 
 const BASE_URL = 'http://127.0.0.1:3000';
-
+export const CARS_PER_PAGE = 7;
 export const garagePageUrl = `${BASE_URL}/${PAGES.GARAGE}`;
 
 enum Methods {
@@ -18,16 +19,16 @@ export type GetCarsParams = {
 
 export type GetCarsResponse = {
   carsData: Car[];
-  carsQuantity: string | null;
+  carsQuantity: string;
 };
 
 export const getCarsOnPage = async ({
   page,
-  limit = 7,
+  limit = CARS_PER_PAGE,
 }: GetCarsParams): Promise<GetCarsResponse> => {
-  const response = await fetch(`${garagePageUrl}?page=${page}&_limit=${limit}`);
+  const response = await fetch(`${garagePageUrl}?_page=${page}&_limit=${limit}`);
   const carsData = await response.json();
-  const carsQuantity = response?.headers?.get('X-Total-Count');
+  const carsQuantity = response.headers.get('X-Total-Count') || '1';
   return { carsData, carsQuantity };
 };
 
@@ -38,7 +39,7 @@ export const getCar = async (id: number): Promise<Car> => {
 };
 
 export const addCar = async ({ name, color }: Car): Promise<Car> => {
-  const response = await fetch(`${garagePageUrl}?name=${name}&color=${color}`, {
+  const response = await fetch(`${garagePageUrl}`, {
     method: Methods.POST,
     headers: {
       'Content-Type': 'application/json',
