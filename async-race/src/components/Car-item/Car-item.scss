@@ -1,14 +1,21 @@
-.track-line {
+.car-line {
   border-bottom: 2px white dotted;
 }
 
 .car-SVG {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 1px solid white;
+  display: block;
+  margin-left: 5%;
+}
+
+.flag-SVG {
+  margin-right: 10%;
 }
 
 .car-buttons {
   margin: 5px 5px;
+}
+
+.track-line {
+  display: flex;
+  justify-content: space-between;
 }

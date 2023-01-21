@@ -1,4 +1,11 @@
-import { ICreateButton, createButton, ICreateInput, createInput, createNode } from '../../helper';
+import {
+  ICreateButton,
+  createButton,
+  ICreateInput,
+  createInput,
+  createNode,
+  renderCar,
+} from '../../helper';
 import { carNameInput, carColorInput } from './Garage_control_pannel';
 import { updateCar } from '../../api';
 import { handleUpdate } from '../Car-item/Car-item';
@@ -36,9 +43,9 @@ async function updateSubmitHandler(e: Event) {
   // TODO if response success => change data
   const selectedRow = document.getElementById(`car_${id}`) as HTMLDivElement;
   const selectedName = selectedRow.getElementsByClassName('track-name')[0] as HTMLSpanElement;
-  selectedName.innerText = `${name}`; // TODO in memory prev value ?!
-  const selectedColor = selectedRow.getElementsByClassName('car-SVG')[0] as HTMLDivElement;
-  selectedColor.style.background = `${color}`;
+  selectedName.innerText = `${name}`;
+  const selectedColor = selectedRow.getElementsByClassName('car-SVG')[0] as HTMLSpanElement;
+  selectedColor.innerHTML = renderCar(`${color}`);
 
   // TODO update TABLE | item, clear & disabled inputs
   formElement.reset();

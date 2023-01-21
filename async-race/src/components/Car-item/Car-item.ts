@@ -1,4 +1,4 @@
-import { createButton, createNode, ICreateButton } from '../../helper';
+import { createButton, createNode, ICreateButton, renderCar, renderFlag } from '../../helper';
 import { deleteCar } from '../../api';
 import { Car } from '../../types/types';
 import APP_STATE from '../../state';
@@ -35,11 +35,11 @@ export function handleUpdate(car: Car) {
 }
 
 export default function createCarItem(car: Car): HTMLElement {
-  const trackLine = createNode({
+  const carLine = createNode({
     tag: 'div',
-    classes: ['track-line'],
+    classes: ['car-line'],
   }) as HTMLElement;
-  trackLine.setAttribute('id', `car_${car.id}`);
+  carLine.setAttribute('id', `car_${car.id}`);
 
   const selectCarBtn: ICreateButton = {
     tag: 'button',
@@ -63,17 +63,28 @@ export default function createCarItem(car: Car): HTMLElement {
   const carName = createNode({
     tag: 'span',
     classes: ['track-name'],
-  }) as HTMLFormElement;
+  }) as HTMLSpanElement;
   carName.innerText = car.name;
 
   const carSVG = createNode({
-    tag: 'div',
+    tag: 'span',
     classes: ['car-SVG'],
-  }) as HTMLFormElement;
-  carName.innerText = car.name;
-  carSVG.style.background = car.color;
+  }) as HTMLSpanElement;
+  carSVG.innerHTML = renderCar(car.color);
 
-  trackLine.append(selectCarButton, removeCarButton, carName, carSVG);
+  const flagSVG = createNode({
+    tag: 'span',
+    classes: ['flag-SVG'],
+  }) as HTMLSpanElement;
+  flagSVG.innerHTML = renderFlag();
 
-  return trackLine;
+  const trackLine = createNode({
+    tag: 'div',
+    classes: ['track-line'],
+  }) as HTMLDivElement;
+  trackLine.append(carSVG, flagSVG);
+
+  carLine.append(selectCarButton, removeCarButton, carName, trackLine);
+
+  return carLine;
 }
