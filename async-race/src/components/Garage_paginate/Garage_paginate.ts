@@ -21,7 +21,7 @@ export const prevButton = createButton(prevBtn) as HTMLButtonElement;
 prevButton.setAttribute('disabled', 'true');
 export const nextButton = createButton(nextBtn) as HTMLButtonElement;
 
-const handlePrevBTN = async () => {
+const handlePrevBTN = async (): Promise<void> => {
   APP_STATE.currentPage -= 1;
   nextButton.removeAttribute('disabled');
   if (APP_STATE.currentPage === 1) {
@@ -35,7 +35,7 @@ const handlePrevBTN = async () => {
   drawCarsOnPage(carsData);
 };
 
-const handleNextBTN = async () => {
+const handleNextBTN = async (): Promise<void> => {
   APP_STATE.currentPage += 1;
   prevButton.removeAttribute('disabled');
   const { carsData, carsQuantity } = await getCarsOnPage({

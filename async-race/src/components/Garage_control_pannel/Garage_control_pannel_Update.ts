@@ -31,7 +31,7 @@ const updateForm = createNode({
 }) as HTMLFormElement;
 updateForm.id = 'updateCarForm';
 
-async function updateSubmitHandler(e: Event) {
+async function updateSubmitHandler(e: Event): Promise<void> {
   e.preventDefault();
   const formElement = document.getElementById('updateCarForm') as HTMLFormElement;
   const formData = new FormData(formElement);

@@ -16,7 +16,7 @@ async function handleDeleteBtn(id?: number): Promise<void> {
   }
 }
 
-async function activateUpdateBtn(car: Car) {
+async function activateUpdateBtn(car: Car): Promise<void> {
   const formUpdate = document.getElementById('updateCarForm') as HTMLFormElement;
   const carID = formUpdate.getElementsByClassName('carIDInput')[0] as HTMLInputElement;
   carID.value = `${car.id}`;
@@ -30,7 +30,7 @@ async function activateUpdateBtn(car: Car) {
   carBtn.removeAttribute('disabled');
 }
 
-export function handleUpdate(car: Car) {
+export function handleUpdate(car: Car): () => void {
   return () => activateUpdateBtn(car);
 }
 

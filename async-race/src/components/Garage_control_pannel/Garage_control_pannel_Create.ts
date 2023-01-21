@@ -11,7 +11,7 @@ const createForm = createNode({
 }) as HTMLFormElement;
 createForm.id = 'createCarForm';
 
-async function createSubmitHandler(e: Event) {
+async function createSubmitHandler(e: Event): Promise<void> {
   e.preventDefault();
   const formElement = document.getElementById('createCarForm') as HTMLFormElement;
   const formData = new FormData(formElement);
@@ -31,9 +31,9 @@ const createCarBtn: ICreateButton = {
   classes: ['form-button', 'create-button'],
 };
 
-const nameInput = createInput(carNameInput) as HTMLInputElement;
-const colorInput = createInput(carColorInput) as HTMLInputElement;
-const createCarButton = createButton(createCarBtn) as HTMLButtonElement;
+const nameInput: HTMLInputElement = createInput(carNameInput);
+const colorInput: HTMLInputElement = createInput(carColorInput);
+const createCarButton: HTMLButtonElement = createButton(createCarBtn);
 createCarButton.addEventListener('click', (e: Event) => createSubmitHandler(e));
 
 createForm.append(nameInput, colorInput, createCarButton);

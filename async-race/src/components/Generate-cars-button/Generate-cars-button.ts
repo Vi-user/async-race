@@ -83,7 +83,7 @@ function makeCarsArray(): string[] {
   return carArray;
 }
 
-async function generateCars() {
+async function generateCars(): Promise<void> {
   const carArray = makeCarsArray();
   carArray.map(async (el) => {
     const [carName, carColor] = el.split('&&');

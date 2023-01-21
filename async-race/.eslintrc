@@ -31,6 +31,7 @@
     "comma-dangle": "off",
     "@typescript-eslint/comma-dangle": "warn",
     "prettier/prettier": "error",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "@typescript-eslint/explicit-function-return-type": "warn"
   }
 }

@@ -18,7 +18,7 @@ const garageRing = createNode({
 
 garageRing.setAttribute('id', 'garage-ring');
 
-export function drawCarsOnPage(carsArray: Car[]) {
+export function drawCarsOnPage(carsArray: Car[]): void {
   const carsContainer = document.getElementById('garage-ring') as HTMLElement;
   carsContainer.innerHTML = '';
   console.log('carsContainer', carsContainer);
