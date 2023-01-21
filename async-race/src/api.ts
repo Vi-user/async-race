@@ -1,15 +1,16 @@
-import { PAGES, Car } from './types/types';
-// import { CARS_PER_PAGE } from './state';
+import { PAGES, Car, RaceData, RaceStatus } from './types/types';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 export const CARS_PER_PAGE = 7;
 export const garagePageUrl = `${BASE_URL}/${PAGES.GARAGE}`;
+export const engineUrl = `${BASE_URL}/engine`;
 
 enum Methods {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
   DELETE = 'DELETE',
+  PATCH = 'PATCH',
 }
 
 export type GetCarsParams = {
@@ -70,4 +71,28 @@ export const deleteCar = async (id: number): Promise<void> => {
   const responseStatus = await response.json();
   return responseStatus;
   // } catch (err) { throw new Error(`${err}`);}
+};
+
+export const startCar = async (id: number, status: RaceStatus): Promise<RaceData> => {
+  const response = await fetch(`${engineUrl}/?id=${id}&status=${status}`, {
+    method: Methods.PATCH,
+  });
+  const raceData = await response.json();
+  return raceData;
+};
+
+export const checkEngine = async (id: number, status: RaceStatus): Promise<RaceData> => {
+  const response = await fetch(`${engineUrl}/?id=${id}&status=${status}`, {
+    method: Methods.PATCH,
+  });
+  const res = await response.json();
+  return res;
+};
+
+export const stopCar = async (id: number, status: RaceStatus): Promise<RaceData> => {
+  const response = await fetch(`${engineUrl}/?id=${id}&status=${status}`, {
+    method: Methods.PATCH,
+  });
+  const raceData = await response.json();
+  return raceData;
 };
