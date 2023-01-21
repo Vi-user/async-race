@@ -1,10 +1,12 @@
+@import '../../styles/variables';
+
 .car-line {
   border-bottom: 2px white dotted;
 }
 
 .car-SVG {
   display: block;
-  margin-left: 5%;
+  //margin-left: 5%;
 }
 
 .flag-SVG {
@@ -18,4 +20,28 @@
 .track-line {
   display: flex;
   justify-content: space-between;
+}
+
+.car-control-container {
+  display: flex;
+  gap: 5px;
+}
+
+.engine-buttons {
+  background-color: $engine-button-background;
+  color: $color-button-text_hover;
+  border: 1px solid $color-border;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 5px;
+  height: 3.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  &:hover {
+    color: $color-button_hover;
+  }
+  &:disabled {
+    color: $color-button-text_disabled;
+    cursor: initial;
+  }
 }

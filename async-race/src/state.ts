@@ -7,7 +7,6 @@ interface State {
   totalCars: number;
   winnersPage: number;
   totalWinners: number;
-  // pagesQuantity: number;
 }
 
 const APP_STATE: State = {
@@ -15,7 +14,6 @@ const APP_STATE: State = {
   totalCars: Number(carsQuantity),
   winnersPage: 1,
   totalWinners: 1,
-  // pagesQuantity: Math.ceil(this.totalCars / CARS_PER_PAGE),
 };
 
 export default APP_STATE;

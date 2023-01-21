@@ -4,10 +4,11 @@ import { Car } from '../../types/types';
 import APP_STATE from '../../state';
 import './Car-item.scss';
 import { currentCarsQuantity } from '../Cars-statistic/Cars-statistic';
+import handleStartBtn from '../Car_control_buttons/Car-control-buttons';
 
 async function handleDeleteBtn(id?: number): Promise<void> {
   if (typeof id === 'number') {
-    const deletedItem = document.getElementById(`car_${id}`);
+    const deletedItem = document.getElementById(`car-line_${id}`);
     await deleteCar(id);
     // TODO check success
     APP_STATE.totalCars -= 1;
@@ -39,7 +40,7 @@ export default function createCarItem(car: Car): HTMLElement {
     tag: 'div',
     classes: ['car-line'],
   }) as HTMLElement;
-  carLine.setAttribute('id', `car_${car.id}`);
+  carLine.setAttribute('id', `car-line_${car.id}`);
 
   const selectCarBtn: ICreateButton = {
     tag: 'button',
@@ -66,25 +67,53 @@ export default function createCarItem(car: Car): HTMLElement {
   }) as HTMLSpanElement;
   carName.innerText = car.name;
 
+  const startCarBtn: ICreateButton = {
+    tag: 'button',
+    name: 'start',
+    classes: ['engine-buttons'],
+  };
+
+  const stopCarBtn: ICreateButton = {
+    tag: 'button',
+    name: 'stop',
+    classes: ['engine-buttons'],
+  };
+
+  const startCarButton = createButton(startCarBtn);
+  startCarButton.setAttribute('id', `start_${car.id}`);
+  const stopCarButton = createButton(stopCarBtn);
+  stopCarButton.setAttribute('id', `stop_${car.id}`);
+  stopCarButton.setAttribute('disabled', 'true');
+
   const carSVG = createNode({
     tag: 'span',
     classes: ['car-SVG'],
   }) as HTMLSpanElement;
+  carSVG.setAttribute('id', `car_${car.id}`);
   carSVG.innerHTML = renderCar(car.color);
+
+  const carControlContainer = createNode({
+    tag: 'div',
+    classes: ['car-control-container'],
+  }) as HTMLDivElement;
+  carControlContainer.append(startCarButton, stopCarButton, carSVG);
 
   const flagSVG = createNode({
     tag: 'span',
     classes: ['flag-SVG'],
   }) as HTMLSpanElement;
+  flagSVG.setAttribute('id', `flag_${car.id}`);
   flagSVG.innerHTML = renderFlag();
 
   const trackLine = createNode({
     tag: 'div',
     classes: ['track-line'],
   }) as HTMLDivElement;
-  trackLine.append(carSVG, flagSVG);
+  trackLine.append(carControlContainer, flagSVG);
 
   carLine.append(selectCarButton, removeCarButton, carName, trackLine);
+
+  startCarButton.addEventListener('click', () => handleStartBtn(car.id));
 
   return carLine;
 }
