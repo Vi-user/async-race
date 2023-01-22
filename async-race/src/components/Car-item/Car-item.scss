@@ -29,7 +29,7 @@
 
 .engine-buttons {
   background-color: $engine-button-background;
-  color: $color-button-text_hover;
+  //color: $color-button-text_hover;
   border: 1px solid $color-border;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -37,11 +37,20 @@
   height: 3.5rem;
   border-radius: 8px;
   font-weight: bold;
+  &_start {
+    border: 1px solid $color-button-text_hover;
+    color: $color-button-text_hover;
+  }
+  &_stop {
+    border: 1px solid $color-button-text;
+    color: $color-button_text;
+  }
   &:hover {
     color: $color-button_hover;
   }
   &:disabled {
-    color: $color-button-text_disabled;
+    color: $color-block-background;
+    background-color: $color-button-text_disabled;
     cursor: initial;
   }
 }

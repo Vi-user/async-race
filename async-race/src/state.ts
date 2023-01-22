@@ -7,6 +7,7 @@ interface State {
   totalCars: number;
   winnersPage: number;
   totalWinners: number;
+  animationID: number;
 }
 
 const APP_STATE: State = {
@@ -14,6 +15,7 @@ const APP_STATE: State = {
   totalCars: Number(carsQuantity),
   winnersPage: 1,
   totalWinners: 1,
+  animationID: 0,
 };
 
 export default APP_STATE;

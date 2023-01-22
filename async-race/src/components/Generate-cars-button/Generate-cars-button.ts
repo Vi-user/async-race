@@ -79,7 +79,6 @@ function makeCarsArray(): string[] {
     const carColor = generateColor();
     carArray.push(`${carName}&&${carColor}`);
   }
-  console.log(carArray, 'carArray');
   return carArray;
 }
 

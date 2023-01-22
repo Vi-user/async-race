@@ -1,4 +1,4 @@
-import { PAGES, Car, RaceData, RaceStatus, Winner } from './types/types';
+import { PAGES, Car, RaceData, RaceStatus, Winner, DriveCheck } from './types/types';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 export const CARS_PER_PAGE = 7;
@@ -83,12 +83,16 @@ export const startCar = async (id: number, status: RaceStatus): Promise<RaceData
   return raceData;
 };
 
-export const checkEngine = async (id: number, status: RaceStatus): Promise<RaceData> => {
-  const response = await fetch(`${engineUrl}/?id=${id}&status=${status}`, {
-    method: Methods.PATCH,
-  });
-  const res = await response.json();
-  return res;
+export const checkEngine = async (id: number, status: RaceStatus): Promise<DriveCheck> => {
+  try {
+    const response = await fetch(`${engineUrl}/?id=${id}&status=${status}`, {
+      method: Methods.PATCH,
+    });
+    const res = await response.json();
+    return res;
+  } catch (e) {
+    return { success: false };
+  }
 };
 
 export const stopCar = async (id: number, status: RaceStatus): Promise<RaceData> => {

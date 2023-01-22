@@ -3,7 +3,7 @@ import { CARS_PER_PAGE, deleteCar, getCarsOnPage } from '../../api';
 import { Car } from '../../types/types';
 import APP_STATE from '../../state';
 import { currentCarsQuantity, currentPage } from '../Cars-statistic/Cars-statistic';
-import handleStartBtn from '../Car_control_buttons/Car-control-buttons';
+import { handleStartBtn, handleStopBtn } from '../Car_control_buttons/Car-control-buttons';
 import { drawCarsOnPage } from '../Garage_page/Garage_page';
 import './Car-item.scss';
 
@@ -87,13 +87,13 @@ export default function createCarItem(car: Car): HTMLElement {
   const startCarBtn: ICreateButton = {
     tag: 'button',
     name: 'start',
-    classes: ['engine-buttons'],
+    classes: ['engine-buttons', 'engine-buttons_start'],
   };
 
   const stopCarBtn: ICreateButton = {
     tag: 'button',
     name: 'stop',
-    classes: ['engine-buttons'],
+    classes: ['engine-buttons', 'engine-buttons_stop'],
   };
 
   const startCarButton = createButton(startCarBtn);
@@ -131,6 +131,7 @@ export default function createCarItem(car: Car): HTMLElement {
   carLine.append(selectCarButton, removeCarButton, carName, trackLine);
 
   startCarButton.addEventListener('click', () => handleStartBtn(car.id));
+  stopCarButton.addEventListener('click', () => handleStopBtn(car.id));
 
   return carLine;
 }

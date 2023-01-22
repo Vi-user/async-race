@@ -25,3 +25,7 @@ export interface Winner {
   wins: number;
   time: number;
 }
+
+export interface DriveCheck {
+  success: boolean;
+}
