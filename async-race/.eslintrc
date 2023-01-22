@@ -32,6 +32,7 @@
     "@typescript-eslint/comma-dangle": "warn",
     "prettier/prettier": "error",
     "object-curly-newline": "off",
-    "@typescript-eslint/explicit-function-return-type": "warn"
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "import/no-cycle": "off"
   }
 }

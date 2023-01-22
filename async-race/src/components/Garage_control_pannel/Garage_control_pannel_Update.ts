@@ -41,7 +41,7 @@ async function updateSubmitHandler(e: Event): Promise<void> {
   const updatedCar = await updateCar({ name: `${name}`, color: `${color}`, id: Number(id) });
   // TODO check results
   // TODO if response success => change data
-  const selectedRow = document.getElementById(`car_${id}`) as HTMLDivElement;
+  const selectedRow = document.getElementById(`car-line_${id}`) as HTMLDivElement;
   const selectedName = selectedRow.getElementsByClassName('track-name')[0] as HTMLSpanElement;
   selectedName.innerText = `${name}`;
   const selectedColor = selectedRow.getElementsByClassName('car-SVG')[0] as HTMLSpanElement;

@@ -18,8 +18,11 @@ const nextBtn: ICreateButton = {
 };
 
 export const prevButton = createButton(prevBtn) as HTMLButtonElement;
-prevButton.setAttribute('disabled', 'true');
+if (APP_STATE.currentPage === 1) prevButton.setAttribute('disabled', 'true');
+prevButton.setAttribute('id', 'prev-btn');
 export const nextButton = createButton(nextBtn) as HTMLButtonElement;
+nextButton.setAttribute('id', 'next-btn');
+if (APP_STATE.totalCars <= CARS_PER_PAGE) nextButton.setAttribute('disabled', 'true');
 
 const handlePrevBTN = async (): Promise<void> => {
   APP_STATE.currentPage -= 1;

@@ -1,19 +1,36 @@
 import { createButton, createNode, ICreateButton, renderCar, renderFlag } from '../../helper';
-import { deleteCar } from '../../api';
+import { CARS_PER_PAGE, deleteCar, getCarsOnPage } from '../../api';
 import { Car } from '../../types/types';
 import APP_STATE from '../../state';
-import './Car-item.scss';
-import { currentCarsQuantity } from '../Cars-statistic/Cars-statistic';
+import { currentCarsQuantity, currentPage } from '../Cars-statistic/Cars-statistic';
 import handleStartBtn from '../Car_control_buttons/Car-control-buttons';
+import { drawCarsOnPage } from '../Garage_page/Garage_page';
+import './Car-item.scss';
 
 async function handleDeleteBtn(id?: number): Promise<void> {
   if (typeof id === 'number') {
-    const deletedItem = document.getElementById(`car-line_${id}`);
     await deleteCar(id);
     // TODO check success
     APP_STATE.totalCars -= 1;
     currentCarsQuantity();
-    deletedItem?.remove();
+    if (APP_STATE.totalCars / CARS_PER_PAGE <= APP_STATE.currentPage - 1) {
+      APP_STATE.currentPage -= 1;
+      const { carsData } = await getCarsOnPage({
+        page: APP_STATE.currentPage,
+        limit: CARS_PER_PAGE,
+      });
+      currentPage(APP_STATE.currentPage);
+      drawCarsOnPage(carsData);
+    } else if (APP_STATE.currentPage < Math.ceil(APP_STATE.totalCars / CARS_PER_PAGE)) {
+      const { carsData } = await getCarsOnPage({
+        page: APP_STATE.currentPage,
+        limit: CARS_PER_PAGE,
+      });
+      drawCarsOnPage(carsData);
+    } else {
+      const deletedItem = document.getElementById(`car-line_${id}`);
+      deletedItem?.remove();
+    }
   }
 }
 

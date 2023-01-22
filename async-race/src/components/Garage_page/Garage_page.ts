@@ -1,5 +1,6 @@
 import { createNode } from '../../helper';
 import { getCarsOnPage } from '../../api';
+
 import createCarItem from '../Car-item/Car-item';
 import './Garage_page.scss';
 import { Car } from '../../types/types';
@@ -21,7 +22,6 @@ garageRing.setAttribute('id', 'garage-ring');
 export function drawCarsOnPage(carsArray: Car[]): void {
   const carsContainer = document.getElementById('garage-ring') as HTMLElement;
   carsContainer.innerHTML = '';
-  console.log('carsContainer', carsContainer);
   carsArray.map((el) => carsContainer.append(createCarItem(el)));
 }
 carsData?.map((el) => garageRing.append(createCarItem(el)));
