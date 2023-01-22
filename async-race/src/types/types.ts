@@ -19,3 +19,9 @@ export enum RaceStatus {
   STOP = 'stopped',
   DRIVE = 'drive',
 }
+
+export interface Winner {
+  id: number;
+  wins: number;
+  time: number;
+}

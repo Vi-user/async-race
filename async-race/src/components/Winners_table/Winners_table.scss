@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+
+.result-container {
+  margin-top: 50px;
+}
+.table-header {
+  display: flex;
+  background: $color-button_background;
+  color: $engine-button-background;
+}
+
+.table-body {
+  background: $engine-button-background;
+}
+
+.table-row {
+  border: 1px solid green;
+  display: flex;
+}
+
+.table-item {
+  border: 2px solid white;
+  padding: 15px;
+  width: 33.3%;
+}

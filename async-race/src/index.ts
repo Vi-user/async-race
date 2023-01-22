@@ -4,7 +4,7 @@ import garageContainer from './components/Garage_page/Garage_page';
 import updateForm from './components/Garage_control_pannel/Garage_control_pannel_Update';
 import { nextButton, prevButton } from './components/Garage_paginate/Garage_paginate';
 import { createNode } from './helper';
-import { winnersPageNumber, winnersTitle } from './pages/Winners/Winners';
+import { winnersContainer, winnersPageNumber, winnersTitle } from './pages/Winners/Winners';
 import './index.scss';
 import { generateCarsButton } from './components/Generate-cars-button/Generate-cars-button';
 
@@ -25,7 +25,7 @@ const winners = createNode({
   tag: 'div',
   classes: ['winners-content', 'hidden-block'],
 }) as HTMLElement;
-winners.append(winnersTitle, winnersPageNumber);
+winners.append(winnersTitle, winnersPageNumber, winnersContainer);
 
 function togglePages(): void {
   garageButton.toggleAttribute('disabled');

@@ -1,9 +1,11 @@
-import { PAGES, Car, RaceData, RaceStatus } from './types/types';
+import { PAGES, Car, RaceData, RaceStatus, Winner } from './types/types';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 export const CARS_PER_PAGE = 7;
+export const WINNERS_PER_PAGE = 10;
 export const garagePageUrl = `${BASE_URL}/${PAGES.GARAGE}`;
 export const engineUrl = `${BASE_URL}/engine`;
+export const winnersUrl = `${BASE_URL}/${PAGES.WINNERS}`;
 
 enum Methods {
   GET = 'GET',
@@ -95,4 +97,24 @@ export const stopCar = async (id: number, status: RaceStatus): Promise<RaceData>
   });
   const raceData = await response.json();
   return raceData;
+};
+
+export type GetWinnersParams = {
+  page: number;
+  limit: number;
+};
+
+export type GetWinnersResponse = {
+  winnersData: Winner[];
+  winnersQuantity: string;
+};
+
+export const getWinnersOnPage = async ({
+  page,
+  limit = WINNERS_PER_PAGE,
+}: GetWinnersParams): Promise<GetWinnersResponse> => {
+  const response = await fetch(`${winnersUrl}?_page=${page}&_limit=${limit}`);
+  const winnersData = await response.json();
+  const winnersQuantity = response.headers.get('X-Total-Count') || '1';
+  return { winnersData, winnersQuantity };
 };

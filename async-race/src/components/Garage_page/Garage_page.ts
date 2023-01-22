@@ -10,12 +10,12 @@ const { carsData } = await getCarsOnPage({ page: 1, limit: 7 });
 const garageContainer = createNode({
   tag: 'div',
   classes: ['garage-container'],
-}) as HTMLFormElement;
+}) as HTMLDivElement;
 
 const garageRing = createNode({
   tag: 'div',
   classes: ['garage-ring'],
-}) as HTMLFormElement;
+}) as HTMLDivElement;
 
 garageRing.setAttribute('id', 'garage-ring');
 
