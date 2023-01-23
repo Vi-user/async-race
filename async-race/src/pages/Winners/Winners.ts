@@ -29,24 +29,5 @@ export async function updateWinnersContent(): Promise<void> {
   const winnersCars = await Promise.all(carsID.map(async (id: number) => getCar(id)));
 
   const mergedArr = winnersData.map((el, index) => ({ ...el, ...winnersCars[index] }));
-  // console.log('mergedArr', mergedArr);
-
-  // export const winnersContainer = createNode({
-  //   tag: 'div',
-  //   classes: ['winners-container'],
-  // }) as HTMLDivElement;
   winnersContainer.append(drawWinnersTable(mergedArr));
 }
-
-// const { winnersData } = await getWinnersOnPage({ page: 1, limit: 10 });
-// const carsID = winnersData.map((el: Winner) => el.id);
-// const winnersCars = await Promise.all(carsID.map(async (id: number) => getCar(id)));
-//
-// const mergedArr = winnersData.map((el, index) => ({ ...el, ...winnersCars[index] }));
-// // console.log('mergedArr', mergedArr);
-//
-// export const winnersContainer = createNode({
-//   tag: 'div',
-//   classes: ['winners-container'],
-// }) as HTMLDivElement;
-// winnersContainer.append(drawWinnersTable(mergedArr));

@@ -15,6 +15,11 @@ enum Methods {
   PATCH = 'PATCH',
 }
 
+enum StatusCodes {
+  OK = 200,
+  NOT_FOUND = 404,
+}
+
 export type GetCarsParams = {
   page: number;
   limit: number;
@@ -121,6 +126,24 @@ export const getWinnersOnPage = async ({
   const winnersData = await response.json();
   const winnersQuantity = response.headers.get('X-Total-Count') || '1';
   return { winnersData, winnersQuantity };
+};
+
+function checkResponse<T>(response: Response): Promise<T> | null {
+  const { status } = response;
+
+  switch (status) {
+    case StatusCodes.OK:
+      return response.json();
+    case StatusCodes.NOT_FOUND:
+      return null;
+    default:
+      return null;
+  }
+}
+
+export const getWinner = async (id: number): Promise<Winner | null> => {
+  const response = await fetch(`${winnersUrl}/${id}`);
+  return checkResponse<Winner>(response);
 };
 
 export const addWinner = async ({ id, wins, time }: Winner): Promise<Winner> => {

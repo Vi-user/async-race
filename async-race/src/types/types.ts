@@ -34,3 +34,8 @@ export interface MergedData extends Winner {
   name: string;
   color: string;
 }
+
+export interface RaceResult {
+  id: number;
+  time: number;
+}

@@ -1,7 +1,7 @@
 import { createButton, ICreateButton } from '../../helper';
 import './Race.scss';
-import { startCar, stopCar } from '../../api';
-import { RaceData, RaceStatus } from '../../types/types';
+import { startCar, stopCar, getWinner, addWinner, updateWinner } from '../../api';
+import { RaceData, RaceResult, RaceStatus } from '../../types/types';
 import startCarAnimation from '../Car_control_buttons/Animation';
 import { handleStopBtn } from '../Car_control_buttons/Car-control-buttons';
 import APP_STATE from '../../state';
@@ -30,6 +30,18 @@ const getCarsIDOnPage = (): FlatArray<number[], 1>[] => {
   return [...carsOnPage].map((car) => Number(car.id.split('_').slice(-1))).flat();
 };
 
+async function recordWinner(raceResults: RaceResult): Promise<void> {
+  console.log('raceResults', raceResults);
+  const res = await getWinner(raceResults.id);
+  if (res) {
+    const { wins, time } = res;
+    const bestTime = time < raceResults.time ? time : raceResults.time;
+    await updateWinner({ id: raceResults.id, wins: wins + 1, time: bestTime });
+  } else {
+    await addWinner({ id: raceResults.id, wins: 1, time: raceResults.time });
+  }
+}
+
 async function handleRace(): Promise<void> {
   raceButton.disabled = true;
   const buttonsStart = document.querySelectorAll(
@@ -40,13 +52,15 @@ async function handleRace(): Promise<void> {
   const carsInfo = await Promise.all(
     carsID.map(async (id: number) => startCar(id, RaceStatus.START)),
   );
-  await Promise.all(
+  const raceResults = await Promise.all(
     carsInfo.map(async (car: RaceData, index: number) => {
       const { velocity, distance } = car;
-      // console.log(carsID[index], velocity, distance);
-      await startCarAnimation(carsID[index], velocity, distance);
+      const res = await startCarAnimation(carsID[index], velocity, distance);
+      return res;
     }),
   );
+  const winner = raceResults.reduce((acc, cur) => (acc.time < cur.time ? acc : cur));
+  if (winner.time !== 999999999) await recordWinner(winner);
   resetRaceButton.disabled = false;
 }
 

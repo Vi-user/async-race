@@ -1,13 +1,19 @@
 import { checkEngine } from '../../api';
-import { RaceStatus } from '../../types/types';
+import { RaceResult, RaceStatus } from '../../types/types';
 import APP_STATE from '../../state';
 
-async function startCarAnimation(id: number, velocity: number, distance: number): Promise<void> {
+async function startCarAnimation(
+  id: number,
+  velocity: number,
+  distance: number,
+): Promise<RaceResult> {
   const car = document.getElementById(`car_${id}`) as HTMLSpanElement;
   let currentPosition = car.offsetLeft;
   const flag = document.getElementById(`flag_${id}`) as HTMLSpanElement;
   const endPosition = flag.offsetLeft;
-  const framesCount = (distance / velocity / 1000) * 60;
+  const time = distance / velocity;
+  // console.log('time', time);
+  const framesCount = (time / 1000) * 60;
   const step = (endPosition - currentPosition) / framesCount;
 
   const animation = (): void => {
@@ -22,6 +28,8 @@ async function startCarAnimation(id: number, velocity: number, distance: number)
 
   const { success } = await checkEngine(id, RaceStatus.DRIVE);
   if (!success) cancelAnimationFrame(APP_STATE.animationID[id]);
+
+  return success ? { id, time: Number((time / 1000).toFixed(2)) } : { id, time: 999999999 };
 }
 
 export default startCarAnimation;
