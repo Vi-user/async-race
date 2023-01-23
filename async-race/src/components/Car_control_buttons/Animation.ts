@@ -15,13 +15,13 @@ async function startCarAnimation(id: number, velocity: number, distance: number)
     car.style.transform = `translateX(${currentPosition}px)`;
     if (currentPosition < endPosition) {
       const animationID = requestAnimationFrame(animation);
-      APP_STATE.animationID = animationID;
+      APP_STATE.animationID[id] = animationID;
     }
   };
   animation();
 
   const { success } = await checkEngine(id, RaceStatus.DRIVE);
-  if (!success) cancelAnimationFrame(APP_STATE.animationID);
+  if (!success) cancelAnimationFrame(APP_STATE.animationID[id]);
 }
 
 export default startCarAnimation;

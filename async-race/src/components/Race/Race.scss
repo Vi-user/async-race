@@ -1,33 +1,6 @@
 @import '../../styles/variables';
 
-.car-line {
-  border-bottom: 2px white dotted;
-}
-
-.car-SVG {
-  display: block;
-  //margin-left: 5%;
-}
-
-.flag-SVG {
-  margin-right: 10%;
-}
-
-.car-buttons {
-  margin: 5px 5px;
-}
-
-.track-line {
-  display: flex;
-  justify-content: space-between;
-}
-
-.car-control-container {
-  display: flex;
-  gap: 5px;
-}
-
-.engine-buttons {
+.race-buttons {
   background-color: $engine-button-background;
   border: 1px solid $color-border;
   transition: all 0.3s ease;
@@ -36,11 +9,12 @@
   height: 3.5rem;
   border-radius: 8px;
   font-weight: bold;
-  &_start {
+  margin: 5px;
+  &_race {
     border: 1px solid $color-button-text_hover;
     color: $color-button-text_hover;
   }
-  &_stop {
+  &_reset {
     border: 1px solid $color-button-text;
     color: $color-button_text;
   }

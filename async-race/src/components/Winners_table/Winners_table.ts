@@ -24,7 +24,6 @@ function drawWinnersTable(winnersData: Winner[]): HTMLElement {
     }
     table.append(tableRow);
   }
-  console.log('table', table);
   return table;
 }
 

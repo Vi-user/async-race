@@ -2,7 +2,7 @@ import { createNode } from '../../helper';
 import APP_STATE from '../../state';
 
 export const garageTitle = createNode({
-  tag: 'p',
+  tag: 'h2',
   classes: ['garage-title'],
 }) as HTMLFormElement;
 garageTitle.innerText = `Garage (${APP_STATE.totalCars})`;
@@ -13,7 +13,7 @@ export function currentCarsQuantity(): HTMLElement {
 }
 
 export const garagePageNumber = createNode({
-  tag: 'p',
+  tag: 'h2',
   classes: ['garage-page-number'],
 }) as HTMLFormElement;
 garagePageNumber.innerText = `Page #${APP_STATE.currentPage}`;

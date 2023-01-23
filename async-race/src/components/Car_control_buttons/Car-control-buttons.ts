@@ -16,7 +16,7 @@ export async function handleStartBtn(id?: number): Promise<void> {
 
 export async function handleStopBtn(id?: number): Promise<void> {
   if (typeof id === 'number') {
-    cancelAnimationFrame(APP_STATE.animationID);
+    cancelAnimationFrame(APP_STATE.animationID[id]);
     const startCarButton = document.getElementById(`start_${id}`) as HTMLButtonElement;
     startCarButton.disabled = false;
     const stopCarButton = document.getElementById(`stop_${id}`) as HTMLButtonElement;

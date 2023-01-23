@@ -7,6 +7,7 @@ import { createNode } from './helper';
 import { winnersContainer, winnersPageNumber, winnersTitle } from './pages/Winners/Winners';
 import './index.scss';
 import { generateCarsButton } from './components/Generate-cars-button/Generate-cars-button';
+import { raceButton, resetRaceButton } from './components/Race/Race';
 
 const header = createNode({
   tag: 'header',
@@ -18,8 +19,17 @@ const garage = createNode({
   tag: 'div',
   classes: ['garage-content'],
 }) as HTMLElement;
-garage.append(createForm, updateForm, generateCarsButton, garageContainer, prevButton, nextButton);
 garageButton.setAttribute('disabled', 'true');
+garage.append(
+  createForm,
+  updateForm,
+  raceButton,
+  resetRaceButton,
+  generateCarsButton,
+  garageContainer,
+  prevButton,
+  nextButton,
+);
 
 const winners = createNode({
   tag: 'div',
