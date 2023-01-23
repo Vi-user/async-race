@@ -29,3 +29,8 @@ export interface Winner {
 export interface DriveCheck {
   success: boolean;
 }
+
+export interface MergedData extends Winner {
+  name: string;
+  color: string;
+}
