@@ -1,5 +1,5 @@
 import { createButton, createNode, ICreateButton, renderCar, renderFlag } from '../../helper';
-import { CARS_PER_PAGE, deleteCar, getCarsOnPage } from '../../api';
+import { CARS_PER_PAGE, deleteCar, deleteWinner, getCarsOnPage } from '../../api';
 import { Car } from '../../types/types';
 import APP_STATE from '../../state';
 import { currentCarsQuantity, currentPage } from '../Cars-statistic/Cars-statistic';
@@ -10,6 +10,7 @@ import './Car-item.scss';
 async function handleDeleteBtn(id?: number): Promise<void> {
   if (typeof id === 'number') {
     await deleteCar(id);
+    await deleteWinner(id);
     // TODO check success
     APP_STATE.totalCars -= 1;
     currentCarsQuantity();

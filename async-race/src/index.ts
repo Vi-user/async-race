@@ -4,7 +4,12 @@ import garageContainer from './components/Garage_page/Garage_page';
 import updateForm from './components/Garage_control_pannel/Garage_control_pannel_Update';
 import { nextButton, prevButton } from './components/Garage_paginate/Garage_paginate';
 import { createNode } from './helper';
-import { winnersContainer, winnersPageNumber, winnersTitle } from './pages/Winners/Winners';
+import {
+  updateWinnersContent,
+  winnersContainer,
+  winnersPageNumber,
+  winnersTitle,
+} from './pages/Winners/Winners';
 import './index.scss';
 import { generateCarsButton } from './components/Generate-cars-button/Generate-cars-button';
 import { raceButton, resetRaceButton } from './components/Race/Race';
@@ -45,6 +50,9 @@ function togglePages(): void {
 }
 
 garageButton.addEventListener('click', togglePages);
-winnersButton.addEventListener('click', togglePages);
+winnersButton.addEventListener('click', async () => {
+  togglePages();
+  await updateWinnersContent();
+});
 
 document?.querySelector('body')?.append(header, garage, winners);

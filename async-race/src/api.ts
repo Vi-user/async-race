@@ -122,3 +122,35 @@ export const getWinnersOnPage = async ({
   const winnersQuantity = response.headers.get('X-Total-Count') || '1';
   return { winnersData, winnersQuantity };
 };
+
+export const addWinner = async ({ id, wins, time }: Winner): Promise<Winner> => {
+  const response = await fetch(`${winnersUrl}`, {
+    method: Methods.POST,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id, wins, time }),
+  });
+  const newWinner = await response.json();
+  return newWinner;
+};
+
+export const updateWinner = async ({ wins, time, id }: Winner): Promise<Winner> => {
+  const response = await fetch(`${winnersUrl}/${id}`, {
+    method: Methods.PUT,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ wins, time }),
+  });
+  const updatedWinner = await response.json();
+  return updatedWinner;
+};
+
+export const deleteWinner = async (id: number): Promise<void> => {
+  const response = await fetch(`${winnersUrl}/${id}`, {
+    method: Methods.DELETE,
+  });
+  const responseStatus = await response.json();
+  return responseStatus;
+};
