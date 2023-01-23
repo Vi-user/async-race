@@ -8,13 +8,13 @@ import { Winner } from '../../types/types';
 export const winnersTitle = createNode({
   tag: 'h2',
   classes: ['winners-title'],
-}) as HTMLFormElement;
+}) as HTMLHeadElement;
 winnersTitle.innerText = `Winners (${APP_STATE.totalWinners})`;
 
 export const winnersPageNumber = createNode({
   tag: 'h2',
   classes: ['garage-page-number'],
-}) as HTMLFormElement;
+}) as HTMLHeadElement;
 winnersPageNumber.innerText = `Page #${APP_STATE.winnersPage}`;
 
 export const winnersContainer = createNode({

@@ -27,3 +27,15 @@
     cursor: initial;
   }
 }
+
+.winner-message {
+  position: absolute;
+  top: 2%;
+  left: 25%;
+  z-index: 5;
+  padding: 10px;
+  background-color: $color-button_hover;
+  border: 1px solid $color-border;
+  color: $color-button_text;
+  border-radius: 8px;
+}

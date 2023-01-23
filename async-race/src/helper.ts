@@ -1,3 +1,6 @@
+import { RaceResult } from './types/types';
+import { getCar } from './api';
+
 export interface ICreateNode {
   tag: string;
   classes: string[];
@@ -64,4 +67,21 @@ export function renderFlag(): string {
     </g>
     </svg>
   `;
+}
+
+export async function addWinnerMessage(raceResults: RaceResult): Promise<void> {
+  const winCarName = await getCar(raceResults.id);
+  const winnerMessage = createNode({
+    tag: 'h2',
+    classes: ['winner-message'],
+  }) as HTMLFormElement;
+  winnerMessage.innerText = `The winner is ${winCarName.name} with time: ${raceResults.time} =)`;
+  document?.querySelector('body')?.prepend(winnerMessage);
+  const removeMsg = (): void => {
+    setTimeout(() => {
+      winnerMessage.remove();
+    }, 5000);
+  };
+
+  removeMsg();
 }

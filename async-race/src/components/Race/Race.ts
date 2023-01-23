@@ -1,4 +1,4 @@
-import { createButton, ICreateButton } from '../../helper';
+import { createButton, ICreateButton, addWinnerMessage } from '../../helper';
 import './Race.scss';
 import { startCar, stopCar, getWinner, addWinner, updateWinner } from '../../api';
 import { RaceData, RaceResult, RaceStatus } from '../../types/types';
@@ -60,6 +60,7 @@ async function handleRace(): Promise<void> {
     }),
   );
   const winner = raceResults.reduce((acc, cur) => (acc.time < cur.time ? acc : cur));
+  if (winner.time !== 999999999) addWinnerMessage(winner);
   if (winner.time !== 999999999) await recordWinner(winner);
   resetRaceButton.disabled = false;
 }
